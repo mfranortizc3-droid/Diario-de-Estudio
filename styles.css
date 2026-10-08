@@ -1,73 +1,160 @@
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #402936;
-  background: #fff5f8;
-  line-height: 1.5;
   color-scheme: light;
+  --paper: #fffaf8;
+  --ink: #392531;
+  --muted-ink: #765f6b;
+  --rose: #a83268;
+  --blush: #f7e5eb;
+  --rule: #e8cbd6;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
 }
 
 * { box-sizing: border-box; }
 
-body { margin: 0; }
+body {
+  margin: 0;
+  background-image: linear-gradient(to bottom, transparent 39px, rgb(168 50 104 / 4%) 40px);
+  background-size: 100% 40px;
+}
 
 main {
-  width: min(100% - 32px, 660px);
-  margin: 48px auto;
+  width: min(100% - 40px, 1040px);
+  margin: 52px auto 72px;
 }
 
-header { margin-bottom: 28px; }
-h1 { margin: 4px 0 8px; font-size: clamp(1.8rem, 6vw, 2.5rem); letter-spacing: -0.04em; }
-h2 { margin: 0 0 20px; font-size: 1.15rem; }
-p { margin: 0; color: #765d69; }
-.subtitle { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; color: #a83268; }
-
-.card, .streak-card {
-  padding: 28px;
-  margin-bottom: 20px;
-  border: 1px solid #f0d8e2;
-  border-radius: 20px;
-  background: #fff;
+.masthead {
+  max-width: 680px;
+  margin: 0 0 32px;
+  padding: 0 0 24px 22px;
+  border-left: 3px solid var(--rose);
+  border-bottom: 1px solid var(--rule);
 }
 
-.streak-card { background: #fce8f0; text-align: center; }
-.streak-card h2 { margin-bottom: 12px; color: #783451; }
-.streaks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.streak-item h3 { margin: 0; color: #783451; font-size: 0.95rem; }
-.streak { color: #642642; font-size: 3.8rem; font-weight: 750; line-height: 1.3; margin-bottom: 10px; }
-.best-streak { color: #a83268; }
-#streak-unit { font-size: 1.25rem; font-weight: 500; }
-#best-streak-unit { font-size: 1.25rem; font-weight: 500; }
-.weekly-card { padding: 24px 28px; margin-bottom: 20px; border: 1px solid #f0d8e2; border-radius: 20px; background: #fff; text-align: center; }
+.subtitle, .card-kicker {
+  margin: 0 0 8px;
+  color: var(--rose);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+h1, h2, h3, p { margin-top: 0; }
+h1, .streak, .weekly-total { font-family: Georgia, "Times New Roman", serif; }
+h1 {
+  margin-bottom: 6px;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+.masthead > p:last-child { margin: 0; color: var(--muted-ink); font-size: 1.02rem; }
+h2 { margin-bottom: 16px; font-size: 1.2rem; line-height: 1.25; }
+p { color: var(--muted-ink); }
+
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(230px, 0.8fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.streak-card, .weekly-card, .card {
+  min-width: 0;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.streak-card {
+  padding: 24px 26px 18px;
+  border-top: 4px solid var(--rose);
+  background: var(--blush);
+}
+.streak-card h2 { margin-bottom: 14px; color: var(--ink); }
+.streaks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.streak-item { min-width: 0; padding: 0 12px; border-left: 1px solid #dfbdca; }
+.streak-item:first-child { padding-left: 0; border-left: 0; }
+.streak-item h3 { min-height: 2.8em; margin: 0; color: var(--muted-ink); font-size: 0.78rem; font-weight: 600; line-height: 1.35; }
+.streak {
+  margin: 2px 0 0;
+  color: var(--ink);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.streak span[aria-hidden="true"] { font-family: sans-serif; font-size: 0.68em; }
+.streak #streak-unit, .streak #best-streak-unit, .streak #monthly-study-unit { font-family: "Trebuchet MS", "Segoe UI", sans-serif; font-size: 0.85rem; }
+.streak-note { margin: 15px 0 0; padding-top: 10px; border-top: 1px solid #dfbdca; font-size: 0.82rem; }
+
+.weekly-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 28px;
+  border-left: 3px solid var(--rose);
+}
+.weekly-card .card-kicker { margin-bottom: 5px; }
 .weekly-card h2 { margin-bottom: 4px; }
-.weekly-total { margin-bottom: 6px; color: #a83268; font-size: 2.5rem; font-weight: 750; }
+.weekly-total { margin: 0 0 4px; color: var(--rose); font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.2; }
+.weekly-total span:last-child { font-family: "Trebuchet MS", "Segoe UI", sans-serif; font-size: 0.95rem; }
+.weekly-card > p:last-child { margin: 0; font-size: 0.84rem; }
 
-form, .field { display: grid; gap: 8px; }
-form { gap: 18px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.workspace { display: grid; grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.2fr); gap: 16px; align-items: start; }
+.card { padding: 24px 26px; }
+.card h2 { margin-bottom: 18px; }
+.form-card { border-top: 3px solid var(--rule); }
+.sessions-card { border-top: 3px solid var(--rule); }
+
+form, .field { display: grid; gap: 7px; }
+form { gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .field { min-width: 0; }
-label { font-size: 0.9rem; font-weight: 600; }
-
-input, button { font: inherit; border-radius: 10px; min-height: 48px; }
-input { width: 100%; min-width: 0; padding: 11px 12px; color: #402936; background: #fff; border: 1px solid #d8b9c7; }
-input::placeholder { color: #8a7480; }
-button { border: 0; padding: 12px 20px; background: #a83268; color: #fff; font-weight: 650; cursor: pointer; }
-button:hover { background: #84264f; }
-input:focus-visible, button:focus-visible { outline: 3px solid #cf6d98; outline-offset: 3px; }
-.message { font-size: 0.9rem; }
+label { font-size: 0.88rem; font-weight: 700; }
+input, button { min-height: 46px; border-radius: 3px; font: inherit; }
+input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid #d8bdc8;
+  background: #fff;
+  color: var(--ink);
+}
+input::placeholder { color: #927b86; }
+button {
+  padding: 10px 16px;
+  border: 1px solid var(--ink);
+  background: var(--rose);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { background: var(--ink); }
+input:focus-visible, button:focus-visible { outline: 3px solid #c96f94; outline-offset: 3px; }
+.message { margin: 0; font-size: 0.88rem; }
 .message:empty { display: none; }
 
-.session-list { list-style: none; padding: 0; margin: 0; }
-.session-list li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid #f3e3e9; }
-.session-list li:first-child { border-top: 0; padding-top: 0; }
+.session-list { margin: 0; padding: 0; list-style: none; }
+.session-list li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid #f0e3e8; }
+.session-list li:first-child { padding-top: 0; border-top: 0; }
 .session-list li:last-child { padding-bottom: 0; }
 .session-topic { display: block; overflow-wrap: anywhere; }
-.session-date { display: block; margin-top: 4px; color: #765d69; font-size: 0.85rem; }
-.session-minutes { flex-shrink: 0; background: #fce8f0; color: #783451; padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; }
+.session-date { display: block; margin: 3px 0 0; color: var(--muted-ink); font-size: 0.82rem; }
+.session-minutes { flex-shrink: 0; padding: 4px 8px; background: var(--blush); color: var(--ink); font-size: 0.82rem; font-weight: 700; }
 
-@media (max-width: 420px) {
-  main { margin: 28px auto; }
-  .card, .streak-card { padding: 20px; }
-  .weekly-card { padding: 20px; }
-  .streaks { grid-template-columns: 1fr; gap: 8px; }
+@media (max-width: 760px) {
+  main { width: min(100% - 32px, 560px); margin-top: 32px; }
+  .overview, .workspace { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  main { width: min(100% - 24px, 420px); margin: 24px auto 40px; }
+  .masthead { margin-bottom: 22px; padding-left: 16px; }
+  .streak-card, .weekly-card, .card { padding: 19px; }
+  .streak-item { padding: 0 8px; }
+  .streak-item h3 { min-height: 3.2em; font-size: 0.72rem; }
+  .streak { font-size: clamp(1.65rem, 8vw, 2.2rem); }
+  .streak #streak-unit, .streak #best-streak-unit, .streak #monthly-study-unit { font-size: 0.72rem; }
   .form-row { grid-template-columns: 1fr; }
 }

@@ -12,4 +12,4 @@ __pycache__/
 node_modules/
 
 # Archivos temporales
-*.log
+*.log  

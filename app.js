@@ -74,6 +74,22 @@ function renderStreak() {
   document.querySelector("#best-streak-unit").textContent = bestStreak === 1 ? "día" : "días";
 }
 
+function calculateMonthlyStudyDays(sessions, today = new Date()) {
+  const todayKey = localDateKey(today);
+  const currentMonth = todayKey.slice(0, 7);
+  const studyDays = new Set(sessions
+    .map(session => session.date)
+    .filter(date => date.slice(0, 7) === currentMonth && date <= todayKey));
+
+  return studyDays.size;
+}
+
+function renderMonthlyStudyDays() {
+  const studyDays = calculateMonthlyStudyDays(sessions);
+  document.querySelector("#monthly-study-days").textContent = studyDays;
+  document.querySelector("#monthly-study-unit").textContent = studyDays === 1 ? "día" : "días";
+}
+
 function calculateBestStreak(sessions, today = new Date()) {
   const todayKey = localDateKey(today);
   const studyDays = [...new Set(sessions
@@ -121,6 +137,7 @@ function renderWeeklyTotal() {
 
 function renderSessions() {
   renderStreak();
+  renderMonthlyStudyDays();
   renderWeeklyTotal();
   list.replaceChildren();
   document.querySelector("#empty-message").hidden = sessions.length > 0;
@@ -187,11 +204,13 @@ renderSessions();
 // Actualizamos la racha tambien si la pagina permanece abierta de un dia a otro.
 setInterval(() => {
   renderStreak();
+  renderMonthlyStudyDays();
   renderWeeklyTotal();
 }, 60000);
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     renderStreak();
+    renderMonthlyStudyDays();
     renderWeeklyTotal();
   }
 });
