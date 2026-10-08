@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diario de Estudio</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="subtitle">UN DÍA A LA VEZ</p>
+      <h1>Diario de Estudio</h1>
+      <p>Registra tu esfuerzo. Sigue avanzando.</p>
+    </header>
+
+    <section class="streak-card" aria-labelledby="streak-title">
+      <h2 id="streak-title">Tus rachas</h2>
+      <div class="streaks">
+        <div class="streak-item">
+          <h3>Racha actual</h3>
+          <p class="streak" aria-live="polite"><span aria-hidden="true">🔥</span> <span id="streak-count">0</span> <span id="streak-unit">días</span></p>
+        </div>
+        <div class="streak-item">
+          <h3>Mejor racha</h3>
+          <p class="streak best-streak" aria-live="polite"><span id="best-streak-count">0</span> <span id="best-streak-unit">días</span></p>
+        </div>
+      </div>
+      <p>Cada día con una sesión cuenta.</p>
+    </section>
+
+    <section class="weekly-card" aria-labelledby="weekly-title">
+      <h2 id="weekly-title">Esta semana</h2>
+      <p class="weekly-total" aria-live="polite"><span id="weekly-minutes">0</span> <span id="weekly-unit">minutos</span></p>
+      <p>Tiempo total estudiado de lunes a domingo.</p>
+    </section>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Nueva sesión</h2>
+      <form id="session-form">
+        <div class="form-row">
+          <div class="field">
+            <label for="date">Fecha</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="minutes">Minutos</label>
+            <input id="minutes" name="minutes" type="number" min="0" step="any" placeholder="30" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="topic">Tema</label>
+          <input id="topic" name="topic" type="text" placeholder="¿Qué has estudiado?" required>
+        </div>
+        <button type="submit">Guardar sesión</button>
+        <p id="form-message" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="sessions-title">
+      <h2 id="sessions-title">Tus sesiones</h2>
+      <p id="empty-message">Todavía no hay sesiones. Registra la primera para empezar.</p>
+      <ul id="session-list" class="session-list"></ul>
+    </section>
+  </main>
+</body>
+</html>
