@@ -1,0 +1,13 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno y claves privadas
+.env
+.env.*
+!.env.example
+
+# Archivos temporales
+*.log
+
+# Configuración MCP (revisar claves antes de subir)
+opencode.json

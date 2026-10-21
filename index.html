@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diario de Estudio</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="contenedor">
+    <header>
+      <h1>Diario de Estudio</h1>
+      <p>Un espacio para estudiar y ver cómo crece tu constancia.</p>
+    </header>
+
+    <div class="resumen">
+    <section class="racha-hero" aria-labelledby="titulo-racha">
+      <h2 id="titulo-racha">Tu racha actual</h2>
+      <p class="racha-numero" id="racha">0</p>
+      <p id="racha-unidad">días seguidos</p>
+      <p class="racha-nota">Cada sesión cuenta.</p>
+    </section>
+
+    <div class="rachas-secundarias">
+      <section class="racha-secundaria" aria-labelledby="titulo-mejor-racha">
+        <h2 id="titulo-mejor-racha">Mejor racha</h2>
+        <p class="racha-numero" id="mejor-racha">0</p>
+        <p id="mejor-racha-unidad">días seguidos</p>
+      </section>
+      <section class="racha-secundaria" aria-labelledby="titulo-dias-mes">
+        <h2 id="titulo-dias-mes">Días este mes</h2>
+        <p class="racha-numero" id="dias-mes">0</p>
+        <p id="dias-mes-unidad">días</p>
+      </section>
+      <section class="semana" aria-labelledby="titulo-semana">
+        <h2 id="titulo-semana">Minutos esta semana</h2>
+        <p class="semana-numero" id="minutos-semana">0 min</p>
+        <p>Del lunes a hoy</p>
+      </section>
+    </div>
+    </div>
+
+    <section class="mapa" aria-labelledby="titulo-mapa">
+      <h2 id="titulo-mapa" tabindex="-1">Tu estudio, día a día</h2>
+      <p id="mapa-error" role="status" hidden></p>
+      <div id="mapa-contenido">
+        <p id="mapa-periodo"></p>
+        <p class="mapa-ayuda">Cada fila es una semana, de lunes a domingo. Consulta un día para ver sus minutos. Hoy tiene un borde doble.</p>
+        <div class="mapa-marco">
+          <div id="mapa-desplazamiento" class="mapa-desplazamiento">
+            <div class="mapa-calendario">
+              <div class="mapa-semana" aria-hidden="true">
+                <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span>
+                <span>Vie</span><span>Sáb</span><span>Dom</span>
+              </div>
+              <div id="mapa-dias" class="mapa-dias" role="group" aria-label="Días de las últimas doce semanas"></div>
+            </div>
+          </div>
+        </div>
+        <ul id="mapa-leyenda" class="mapa-leyenda" aria-label="Intensidad según minutos diarios"></ul>
+        <p id="mapa-vacio" hidden>Aún no hay estudio registrado en este periodo hasta hoy. Registra una sesión para empezar.</p>
+        <div id="mapa-consulta" class="mapa-consulta" role="group" aria-label="Consulta del día" hidden>
+          <p id="mapa-consulta-texto" aria-live="polite" aria-atomic="true"></p>
+          <button id="mapa-cerrar" type="button">Cerrar</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="contenido">
+    <section class="tarjeta registro" aria-labelledby="titulo-formulario">
+      <h2 id="titulo-formulario">Registrar una sesión</h2>
+      <form id="formulario">
+        <div class="campo">
+          <label for="fecha">Fecha</label>
+          <input id="fecha" name="fecha" type="date" required>
+        </div>
+        <div class="campo">
+          <label for="tema">Tema</label>
+          <input id="tema" name="tema" type="text" placeholder="¿Qué has estudiado?" required>
+        </div>
+        <div class="campo">
+          <label for="minutos">Minutos</label>
+          <input id="minutos" name="minutos" type="number" min="0" step="any" placeholder="Por ejemplo, 25" required>
+        </div>
+        <button id="guardar-sesion" type="submit">Guardar sesión</button>
+        <p id="mensaje" role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="historial" aria-labelledby="titulo-sesiones">
+      <h2 id="titulo-sesiones">Tus sesiones</h2>
+      <p id="sin-sesiones">Tu diario empieza con una sesión. Registra qué has estudiado y durante cuánto tiempo.</p>
+      <ul id="sesiones" class="sesiones"></ul>
+    </section>
+    </div>
+  </main>
+</body>
+</html>
