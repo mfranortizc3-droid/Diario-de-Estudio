@@ -1,15 +1,13 @@
-# Variables privadas
+# Dependencias
+node_modules/
+
+# Variables de entorno y claves privadas
 .env
 .env.*
 !.env.example
 
-# Python
-__pycache__/
-*.pyc
-.venv/
-
-# Node.js
-node_modules/
-
 # Archivos temporales
-*.log  
+*.log
+
+# Configuración MCP (revisar claves antes de subir)
+opencode.json

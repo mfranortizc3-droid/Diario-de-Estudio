@@ -15,8 +15,8 @@ programar.
 - Diseño limpio y responsive; cualquier pantalla nueva debe verse bien en el móvil.
 
 ## Datos
-- localStorage, clave `diario-estudio-sesiones`: array de `{ date: "AAAA-MM-DD", topic,
-minutes }`.
+- localStorage, clave `diario-de-estudio-sesiones`: array de `{ fecha: "AAAA-MM-DD", tema,
+minutos }`.
 - Si cambias la forma de los datos, mantén compatibilidad con lo ya guardado o el usuario
 perderá sus sesiones.
 
@@ -26,6 +26,13 @@ Date("AAAA-MM-DD")`: se interpretan en UTC y desplazan el día.
 - Racha = días consecutivos con al menos 1 sesión que terminan hoy. Si hoy no hay sesión
 pero ayer sí, la racha sigue viva y se cuenta desde ayer.
 - Varias sesiones el mismo día cuentan como un solo día. Las fechas futuras no suman.
+- Mejor racha = máximo histórico de días consecutivos distintos hasta hoy, aunque el
+tramo haya terminado. Se recalcula desde las sesiones, sin guardar otro valor en localStorage;
+añadir sesiones pasadas puede unir tramos. Recorre días con `setDate`, no milisegundos fijos.
+- Minutos semanales = suma de `minutos` de sesiones con fecha entre el lunes de la semana
+actual y hoy, usando fechas locales. Formato: `X min` si < 60, `X h Y min` si >= 60.
+- Días mensuales = días distintos con al menos 1 sesión entre el día 1 y hoy del mes actual,
+usando fechas locales. Varias sesiones en un día cuentan una sola vez.
 
 ## Forma de trabajar
 - Haz solo lo que se pide: no añadas funcionalidades por tu cuenta.
@@ -40,15 +47,31 @@ porqué) y errores a evitar.
 - Mantenlo breve (máximo ~50 líneas): resume o elimina lo que ya no aporte.
 - Si algo se convierte en una regla permanente, propón moverlo a `AGENTS.md` en lugar de
 dejarlo en la memoria.
-- No guardes nunca datos sensibles (claves, tokens, datos personales). 
+- No guardes nunca datos sensibles (claves, tokens, datos personales).
+
+## Comandos
+- Tests: `node --test`
+
+## Reglas
+- Lee `docs/constitution.md` y la spec activa (`specs/NNN-*/`) antes de tocar código. 
 
 ## Límites
 - ✅ Siempre: respetar las reglas de fechas y racha, mantener los textos en español.
+- ✅ Siempre: actualizar `MEMORY.md` al terminar cada tarea. 
 - ⚠️ Pregunta antes: crear archivos nuevos, cambiar el formato de los datos guardados.
 - 🚫 Nunca: añadir dependencias, frameworks o un paso de build.
-- ✅ Siempre: actualizar `MEMORY.md` al terminar cada tarea.
 
 ## Verificación
-- No hay tests ni lint. Probar abriendo `index.html` en el navegador.
+- No hay tests automáticos. Después de cada cambio, verifica con el MCP de Chrome
+DevTools: abre `index.html`, prueba la funcionalidad, revisa la consola y comprueba la
+vista móvil.
+- Para la mejor racha, comprobar duplicados, huecos, registros retroactivos, fechas futuras
+y cambios de mes, año y horario; `calcularMejorRacha(sesiones, hoy)` admite una fecha de prueba.
+- Para minutos semanales, comprobar semana vacía, cambio de semana, minutos decimales,
+fechas futuras y cambios de horario; `calcularMinutosSemana(sesiones, hoy)` admite una fecha de prueba.
+- Para días mensuales, comprobar mes vacío, cambio de mes, sesiones repetidas, fechas futuras
+y cambios de horario; `calcularDiasMes(sesiones, hoy)` admite una fecha de prueba.
 - Para empezar de cero: DevTools → Application → Local Storage → borrar la clave
-`diario-estudio-sesiones`.
+`diario-de-estudio-sesiones`. 
+
+
